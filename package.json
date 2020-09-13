@@ -1,0 +1,35 @@
+{
+  "name": "blogger-api",
+  "version": "1.0.0",
+  "description": "Service API for Blogger app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-server": "nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashwin9999/blogger-api.git"
+  },
+  "author": "Ashwin Mishra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashwin9999/blogger-api/issues"
+  },
+  "homepage": "https://github.com/ashwin9999/blogger-api#readme",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "@koa/router": "^9.4.0",
+    "koa": "^2.13.0",
+    "koa-compress": "^5.0.1",
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.4",
+    "@types/koa-compress": "^4.0.0",
+    "@types/koa__cors": "^3.0.1",
+    "@types/koa__router": "^8.0.2",
+    "nodemon": "^2.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  }
+}

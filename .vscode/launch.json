@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug",
+        "type": "node",
+        "request": "launch",
+        "runtimeVersion": "12.14.1",
+        "args": [
+          "-r",
+          "ts-node/register",
+          "src/index.ts"
+        ],
+        "cwd": "${workspaceFolder}",
+        "protocol": "inspector",
+        "sourceMaps": true,
+        "outFiles": [
+          ".ts-node/**"
+        ],
+        "outputCapture": "std",
+        "env": {
+          "HOST": "0.0.0.0",
+          "PORT": "3000",
+          "CORS_ORIGIN": ""
+        }
+      }
+    ]
+  }
