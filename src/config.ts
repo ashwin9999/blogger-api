@@ -1,7 +1,9 @@
+import { env } from "process";
+
 export const config = {
-    host: 'localhost',
-    port: 3000,
+    host: env.HOST,
+    port: +env.PORT,
     cors: {
-        origin: '',
+        origin: env.CORS,
     },
 };
