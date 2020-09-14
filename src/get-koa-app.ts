@@ -6,6 +6,8 @@ import * as compress from 'koa-compress';
 
 import { ContextAugmentations, KoaAppConfig, StandardResponseFormat } from "./interface";
 
+import { responseMiddleware } from './middleware';
+
 export const getKoaApp = (config: KoaAppConfig) => {
     const app = new Koa<StandardResponseFormat, ContextAugmentations>();
 
@@ -16,6 +18,8 @@ export const getKoaApp = (config: KoaAppConfig) => {
     if (config.compression) {
         app.use(compress());
     }
+
+    app.use(responseMiddleware);
 
     app.listen = app.listen.bind(app, config.port, config.host, () => {
         console.log(`Listening on ${config.host}:${config.port}`);
