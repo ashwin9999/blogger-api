@@ -6,4 +6,11 @@ export const config = {
     cors: {
         origin: env.CORS,
     },
+    db: {
+        host: env.PGHOST,
+        port: +env.PGPORT,
+        user: env.PGUSER,
+        password: env.PGPASSWORD,
+        database: env.PGDATABASE,
+    },
 };
