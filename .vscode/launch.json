@@ -21,7 +21,12 @@
         "env": {
           "HOST": "0.0.0.0",
           "PORT": "3000",
-          "CORS_ORIGIN": ""
+          "CORS_ORIGIN": "",
+          "PGDATABASE": "blogger",
+          "PGHOST": "localhost",
+          "PGPORT": "5432",
+          "PGUSER": "postgres",
+          "PGPASSWORD": "Blogger123",
         }
       }
     ]
