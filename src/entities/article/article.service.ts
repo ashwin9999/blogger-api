@@ -87,7 +87,7 @@ export const createArticle = async (article: Article): Promise<Article> => {
 export const deleteArticle = async (id: number): Promise<Article> => {
     const res: QueryResult = await client.query(`
         UPDATE article
-        SET "deleted" = TRUE
+        SET "deleted" = NOW()
         WHERE id = $1
     `, [id]);
 
