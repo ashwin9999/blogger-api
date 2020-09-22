@@ -13,4 +13,5 @@ export const config = {
         password: env.PGPASSWORD,
         database: env.PGDATABASE,
     },
+    saltRounds: +env.SALTROUNDS,
 };
