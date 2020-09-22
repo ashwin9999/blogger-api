@@ -1,4 +1,5 @@
 import * as bcrypt from 'bcrypt';
+import { config } from '../../config';
 
 import { Controller, Context } from '../../interface';
 import { User } from './user.interface';
@@ -22,7 +23,7 @@ export const getUserByIdController: Controller = async (ctx: Context) => {
 export const createUserController: Controller = async (ctx: Context) => {
     const { user } = ctx.body;
 
-    const saltRounds = 10;
+    const saltRounds = config.saltRounds;
 
     // TODO: need to design a safer pattern for password encryption
     
