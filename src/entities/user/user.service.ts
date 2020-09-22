@@ -39,3 +39,24 @@ export const deleteUser = async (id: number): Promise<User> => {
 
     return res.rows[0];
 };
+
+export const createUser = async (user: User): Promise<User> => {
+    const {
+        name,
+        email,
+        passwordHash,
+        dob,
+        timezone,
+        likes,
+        followers,
+        totalArticles,
+    } = user;
+    
+    const res: QueryResult = await client.query(`
+        INSERT INTO USER 
+            (name, email, "passwordHash", dob, timezone, likes, followers, "totalArticles")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    `, [name, email, passwordHash, dob, timezone, likes, followers, totalArticles]);
+
+    return res.rows[0];
+}

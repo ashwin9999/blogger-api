@@ -1,6 +1,8 @@
+import * as bcrypt from 'bcrypt';
+
 import { Controller, Context } from '../../interface';
 import { User } from './user.interface';
-import { deleteUser, getUserById } from './user.service';
+import { createUser, deleteUser, getUserById } from './user.service';
 
 // TODO: add a more complex user search
 
@@ -18,8 +20,25 @@ export const getUserByIdController: Controller = async (ctx: Context) => {
 };
 
 export const createUserController: Controller = async (ctx: Context) => {
-    // TODO: add service to create a user
+    const { user } = ctx.body;
+
+    const saltRounds = 10;
+
+    // TODO: need to design a safer pattern for password encryption
     
+    const passwordHash = await bcrypt.hash(user.passwordHash, saltRounds);
+
+    const sanitizedUser = { ...user };
+
+    sanitizedUser.passwordHash = passwordHash;
+    
+    const result = await createUser(sanitizedUser);
+
+    ctx.state = {
+        result,
+        error: false,
+    }
+
     return ctx.respondOk(ctx.state);
 };
 
