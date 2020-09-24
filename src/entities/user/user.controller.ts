@@ -3,7 +3,7 @@ import { config } from '../../config';
 
 import { Controller, Context } from '../../interface';
 import { User } from './user.interface';
-import { createUser, deleteUser, getUserById } from './user.service';
+import { createUser, deleteUser, getUserById, updateUser } from './user.service';
 
 // TODO: add a more complex user search
 
@@ -58,7 +58,16 @@ export const deleteUserController: Controller = async (ctx: Context) => {
 };
 
 export const updateUserController: Controller = async (ctx: Context) => {
-    // TODO: add service to update a user
+    const { id } = ctx.query;
+
+    const { newUser } = ctx.body;
+
+    const result = await updateUser(id, newUser);
+
+    ctx.state = {
+        result,
+        error: false,
+    };
     
     return ctx.respondOk(ctx.state);
 };

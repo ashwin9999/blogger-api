@@ -53,10 +53,37 @@ export const createUser = async (user: User): Promise<User> => {
     } = user;
     
     const res: QueryResult = await client.query(`
-        INSERT INTO USER 
+        INSERT INTO user 
             (name, email, "passwordHash", dob, timezone, likes, followers, "totalArticles")
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     `, [name, email, passwordHash, dob, timezone, likes, followers, totalArticles]);
 
     return res.rows[0];
-}
+};
+
+export const updateUser = async (id: number, newUser: User): Promise<User> => {
+    const {
+        name,
+        email,
+        dob,
+        timezone,
+        likes,
+        followers,
+        totalArticles,
+    } = newUser; 
+
+    const res: QueryResult = await client.query(`
+        UPDATE user
+        SET 
+            name = $1
+            AND email = $2
+            AND dob = $3
+            AND timezone = $4
+            AND likes = $5
+            AND followers = $6
+            AND "totalArticles" = $7
+        WHERE id = $8
+    `, [name, email, dob, timezone, likes, followers, totalArticles, id]);
+
+    return res.rows[0];
+};
