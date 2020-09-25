@@ -28,7 +28,7 @@ export const getArticles = async (): Promise<Article[]> => {
     `, []);
 
     return res.rows[0];
-}
+};
 
 
 /**
@@ -55,7 +55,7 @@ export const getArticleById = async (id: number): Promise<Article> => {
     `, [id]);
 
     return res.rows[0];
-}
+};
 
 /**
  * Creates an article
@@ -79,7 +79,7 @@ export const createArticle = async (article: Article): Promise<Article> => {
     `, [title, authorId, link, likes, img, genre, body]);
 
     return res.rows[0];
-}
+};
 
 /**
  * Does a soft delete so that the deleted items are recoverable
@@ -92,4 +92,26 @@ export const deleteArticle = async (id: number): Promise<Article> => {
     `, [id]);
 
     return res.rows[0];
-}
+};
+
+export const updateArticle = async (id: number, newArticle: Article): Promise<Article> => {
+    const {
+        title,
+        img,
+        genre,
+        body
+    } = newArticle;
+
+    const res: QueryResult = await client.query(`
+        UPDATE article
+        SET
+            title = $1
+            ,img = $2
+            ,genre = $3
+            ,body = $4
+        FROM article
+        WHERE id = $5
+    `, [title, img, genre, body]);
+
+    return res.rows[0];
+};

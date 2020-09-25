@@ -76,12 +76,12 @@ export const updateUser = async (id: number, newUser: User): Promise<User> => {
         UPDATE user
         SET 
             name = $1
-            AND email = $2
-            AND dob = $3
-            AND timezone = $4
-            AND likes = $5
-            AND followers = $6
-            AND "totalArticles" = $7
+            ,email = $2
+            ,dob = $3
+            ,timezone = $4
+            ,likes = $5
+            ,followers = $6
+            ,"totalArticles" = $7
         WHERE id = $8
     `, [name, email, dob, timezone, likes, followers, totalArticles, id]);
 
