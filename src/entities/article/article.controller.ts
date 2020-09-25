@@ -1,6 +1,6 @@
 import { Controller, Context } from '../../interface';
 import { Article } from './article.interface';
-import { deleteArticle, getArticleById, getArticles } from './article.service';
+import { deleteArticle, getArticleById, getArticles, updateArticle } from './article.service';
 
 export const getArticlesController: Controller = async (ctx: Context) => {
     const result: Article[] = await getArticles();
@@ -33,7 +33,16 @@ export const createArticleController: Controller = async (ctx: Context) => {
 };
 
 export const updateArticleController: Controller = async (ctx: Context) => {
-    // TODO: add service to update article
+    const { id } = ctx.query;
+
+    const { newArticle } = ctx.body;
+
+    const result = await updateArticle(id, newArticle);
+
+    ctx.state = {
+        result,
+        error: false,
+    };
     
     return ctx.respondOk(ctx.state);
 };
