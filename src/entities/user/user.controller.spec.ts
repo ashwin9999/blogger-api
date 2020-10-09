@@ -9,7 +9,7 @@ import * as sinon from 'sinon';
 import { StandardResponseFormat } from '../../interface';
 import { Context } from '../../interface';
 
-import { updateUserController } from './user.controller';
+import { deleteUserController, updateUserController } from './user.controller';
 import { User } from './user.interface';
 
 import * as userService from './user.service';
@@ -62,6 +62,24 @@ import * as userService from './user.service';
 
         expect(this.updateUser.called).to.be.true;
         expect(this.updateUser.calledWithExactly(id, this.user));
+
+        expect(respondOk.called).to.be.true;
+        expect(respondOk.calledWithExactly(expected));
+    }
+
+    @test async 'should delete a user'() {
+        const respondOk: sinon.SinonStub = sinon.stub();
+
+        const id = this.user.id;
+
+        const expected: StandardResponseFormat<User> = { result: this.user, error: false };
+
+        const ctx: Context = <Context> <unknown> { respondOk };
+
+        await deleteUserController(ctx);
+
+        expect(this.deleteUser.called).to.be.true;
+        expect(this.deleteUser.calledWithExactly(id));
 
         expect(respondOk.called).to.be.true;
         expect(respondOk.calledWithExactly(expected));
