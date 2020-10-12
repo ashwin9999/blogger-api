@@ -102,5 +102,4 @@ import * as userService from './user.service';
         expect(respondOk.called).to.be.true;
         expect(respondOk.calledWithExactly(expected));
     }
-
 }
