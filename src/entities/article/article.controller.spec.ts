@@ -9,7 +9,7 @@ import * as sinon from 'sinon';
 import { StandardResponseFormat } from '../../interface';
 import { Context } from '../../interface';
 
-import { getArticleByIdController, updateArticleController } from './article.controller';
+import { deleteArticleController, getArticleByIdController, updateArticleController } from './article.controller';
 import { Article } from './article.interface';
 
 import * as articleService from './article.service';
@@ -17,6 +17,7 @@ import * as articleService from './article.service';
 @suite export class ArticleControllerTests {
     private updateArticle: sinon.SinonStub;
     private getArticleById: sinon.SinonStub;
+    private deleteArticle: sinon.SinonStub;
 
     private readonly article: Article = {
         id: 1,
@@ -35,6 +36,7 @@ import * as articleService from './article.service';
     before() {
         this.updateArticle = sinon.stub(articleService, 'updateArticle').resolves(this.article);
         this.getArticleById = sinon.stub(articleService, 'getArticleById').resolves(this.article);
+        this.deleteArticle = sinon.stub(articleService, 'deleteArticle').resolves(this.article);
     }
 
     after() {
@@ -73,6 +75,24 @@ import * as articleService from './article.service';
 
         expect(this.getArticleById.called).to.be.true;
         expect(this.getArticleById.calledWithExactly(this.article.id));
+
+        expect(respondOk.called).to.be.true;
+        expect(respondOk.calledWithExactly(expected));
+    }
+
+    @test async 'should delete an article'() {
+        const respondOk: sinon.SinonStub = sinon.stub();
+
+        const id = this.article.id;
+
+        const expected: StandardResponseFormat<Article> = { result: this.article, error: false };
+
+        const ctx: Context = <Context> <unknown> { respondOk };
+        
+        await deleteArticleController(ctx);
+
+        expect(this.deleteArticle.called).to.be.true;
+        expect(this.deleteArticle.calledWithExactly(id));
 
         expect(respondOk.called).to.be.true;
         expect(respondOk.calledWithExactly(expected));
