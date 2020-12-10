@@ -1,10 +1,9 @@
 import { Genre } from "../../constants/genre.enum";
 
 /**
- * Article interface
+ * Article interface during creation
  */
-export interface Article {
-    id: number;
+export interface ArticleCreate {
     title: string;
     authorId: number;
     link: string;
@@ -17,4 +16,14 @@ export interface Article {
     deleted: string;
 }
 
-// TODO: add CREATE and UPDATE interfaces for article
+/**
+ * Article interface during update
+ */
+export type ArticleUpdate = ArticleCreate;
+
+/**
+ * Article interface
+ */
+export interface Article extends ArticleCreate {
+    id: number;
+}
