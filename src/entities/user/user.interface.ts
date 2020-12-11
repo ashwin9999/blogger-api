@@ -1,6 +1,7 @@
-// TODO: add the missing properties
-export interface User {
-    id: number;
+/**
+ * Interface of a user during creation
+ */
+export interface UserCreate {
     name: string;
     email: string;
     passwordHash: string;
@@ -12,4 +13,16 @@ export interface User {
     created: string;
     updated: string;
     deleted: string;
+}
+
+/**
+ * Type of a user during update
+ */
+export type UserUpdate = UserCreate;
+
+/**
+ * Interface of a user
+ */
+export interface User extends UserCreate {
+    id: number;
 }
